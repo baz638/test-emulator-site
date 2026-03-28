@@ -1,41 +1,191 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Android Cloud Emulator</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Fake Android Emulator</title>
+
+<style>
+body {
+    background: black;
+    font-family: Arial;
+    text-align: center;
+    color: white;
+}
+
+.emulator {
+    width: 720px;
+    height: 420px;
+    background: black;
+    border: 15px solid #ddd;
+    border-radius: 20px;
+    margin: 50px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+/* intro */
+.text-box {
+    background: #ddd;
+    color: black;
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.start-btn {
+    background: lime;
+    color: black;
+    padding: 20px;
+    font-size: 20px;
+    width: 320px;
+    margin: 40px auto;
+    cursor: pointer;
+}
+
+/* home screen */
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    height: 100%;
+}
+
+.app {
+    text-align: center;
+    cursor: pointer;
+}
+
+.app img {
+    width: 70px;
+    height: 70px;
+}
+
+/* fake app screen */
+.app-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 22px;
+}
+
+/* controls */
+.controls {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+.back-btn {
+    background: red;
+    padding: 10px 40px;
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+</style>
+
 </head>
+
 <body>
-    <div id="main-container">
-        <h1>Android Cloud Gaming</h1>
-        <div id="emulator-window">
-            <div id="display-area">
-                <div id="placeholder-text">
-                    <p>Emulator Offline</p>
-                    <p>Click "Start Emulator" to boot Android</p>
-                </div>
-            </div>
-            <button id="fullscreen-btn">⛶ Fullscreen</button>
-        </div>
-        <div id="controls">
-            <button id="start-btn">Start Emulator</button>
-            <div class="sliders">
-                <div class="slider-group">
-                    <label>Volume</label>
-                    <input type="range" id="vol-slider" min="0" max="100" value="80">
-                </div>
-                <div class="slider-group">
-                    <label>Quality</label>
-                    <input type="range" id="quality-slider" min="360" max="1080" step="360" value="720">
-                </div>
-                <div class="slider-group">
-                    <label>Target FPS</label>
-                    <input type="range" id="fps-slider" min="30" max="60" step="30" value="60">
-                </div>
-            </div>
-        </div>
+
+<div class="emulator">
+
+```
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+    <div class="text-box">
+        This window will launch roblox and the back button takes you to an android home screen. There is a play store app, chrome app, and roblox launcher.
     </div>
-    <script src="script.js"></script>
+
+    <div class="start-btn" onclick="startEmulator()">
+        Ready to start the Emulator?
+    </div>
+</div>
+
+<!-- HOME SCREEN -->
+<div id="homeScreen" class="screen">
+    <div class="home">
+
+        <div class="app" onclick="openRoblox()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg">
+            <div>Roblox</div>
+        </div>
+
+        <div class="app" onclick="openPlayStore()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
+            <div>Play Store</div>
+        </div>
+
+        <div class="app" onclick="openChrome()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png">
+            <div>Chrome</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- APP SCREEN -->
+<div id="appScreen" class="screen">
+    <div class="app-screen" id="appContent">
+        Loading...
+    </div>
+</div>
+
+<div class="controls">
+    🔊 ⏺ ⛶
+</div>
+```
+
+</div>
+
+<h2>
+    Ingame Back Button 
+    <span class="back-btn" onclick="goHome()"></span>
+</h2>
+
+<script>
+function startEmulator() {
+    switchScreen("homeScreen");
+}
+
+function openRoblox() {
+    // opens roblox site
+    window.open("https://www.roblox.com/home", "_blank");
+}
+
+function openPlayStore() {
+    document.getElementById("appContent").innerText = "Fake Play Store (not real)";
+    switchScreen("appScreen");
+}
+
+function openChrome() {
+    document.getElementById("appContent").innerText = "Fake Chrome Browser";
+    switchScreen("appScreen");
+}
+
+function goHome() {
+    switchScreen("homeScreen");
+}
+
+function switchScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
+
 </body>
 </html>
