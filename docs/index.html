@@ -1,47 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>To‑Do + Emulator Demo</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Cloud Emulator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>To‑Do List (stored locally)</h1>
-    <p>Tasks are saved in your browser using localStorage.</p>
-  </header>
-
-  <main>
-    <section id="todo-section" class="card">
-      <form id="todo-form" autocomplete="off">
-        <input id="new-task" type="text" placeholder="Add a new task..." required />
-        <button id="add-btn" type="submit">Add</button>
-      </form>
-
-      <div id="counts" class="counts"></div>
-
-      <ul id="tasks" class="task-list" aria-live="polite"></ul>
-
-      <div class="controls">
-        <button id="clear-completed">Clear completed</button>
-        <button id="clear-all">Clear all</button>
-      </div>
-    </section>
-
-    <section id="v86-section" class="card">
-      <h2>v86 Emulator (coming next)</h2>
-      <p>When you're ready we'll add v86 assets and a tiny test image so you can run an in-browser emulator.</p>
-      <div id="v86-container"></div>
-      <button id="start-v86">Start Emulator</button>
-      <button id="stop-v86">Stop Emulator</button>
-    </section>
-  </main>
-
-  <footer>
-    <small>Saved in localStorage under key <code>my-tasks</code>. Works offline in the same browser.</small>
-  </footer>
-
-  <script src="script.js"></script>
+    <div id="main-container">
+        <h1>Android Cloud Gaming</h1>
+        <div id="emulator-window">
+            <div id="display-area">
+                <div id="placeholder-text">
+                    <p>Emulator Offline</p>
+                    <p>Click "Start Emulator" to boot Android</p>
+                </div>
+            </div>
+            <button id="fullscreen-btn">⛶ Fullscreen</button>
+        </div>
+        <div id="controls">
+            <button id="start-btn">Start Emulator</button>
+            <div class="sliders">
+                <div class="slider-group">
+                    <label>Volume</label>
+                    <input type="range" id="vol-slider" min="0" max="100" value="80">
+                </div>
+                <div class="slider-group">
+                    <label>Quality</label>
+                    <input type="range" id="quality-slider" min="360" max="1080" step="360" value="720">
+                </div>
+                <div class="slider-group">
+                    <label>Target FPS</label>
+                    <input type="range" id="fps-slider" min="30" max="60" step="30" value="60">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
